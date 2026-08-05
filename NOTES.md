@@ -110,21 +110,80 @@ If J&A later shoots true product close-ups, we can put thumbnails back on the
 cards. Worth asking for: chef coats on a rack, folded bar towels, an entrance
 mat, a catering table set, and a driver restocking a customer's shelf.
 
-**Testimonials.** Three placeholder quotes are marked with a yellow "Placeholder"
-tag. Real quotes exist on Yelp and Google; get J&A's OK before publishing any
-customer name. Delete the `<span class="placeholder-tag">` lines once replaced.
-If they'd rather not use testimonials at all, delete the whole section — the trust
-strip already carries that weight.
+## Testimonials
+
+Three real Google reviews, all 5-star. Source screenshots are in `reviews/`
+(root level, not deployed).
+
+| Shown as | Reviewer | Age | Angle |
+|---|---|---|---|
+| Anthony D. | Anthony Dagostino (Local Guide, 494 reviews) | ~5 yrs | Switched suppliers, no hidden costs, owner's cell |
+| Matt | Matt (6 reviews) | ~8 yrs | Reliability, names John and Jonathan |
+| Shauna B. | Shauna Bednar (4 reviews) | ~9 mths | Short and warm, about the staff |
+
+Editorial decisions, all reversible:
+
+- **Cut the competitor's name.** Anthony's review says he replaced "Sintas"
+  (Cintas, misspelled) with J&A. Naming a national competitor on a client site
+  invites trouble and adds nothing, so that sentence is omitted. The "no hidden
+  costs, contracts" point survives it.
+- **"BS" is still in there**, verbatim. It's authentic and it lands. If John
+  would rather it weren't on his website, cut to "No hidden costs, contracts…"
+- **Omissions are marked with `…`**, and no word is altered. Only exception:
+  "HIGHLY RECOMMENDED!!" set as "Highly recommended!" so it isn't shouting in
+  all-caps next to Anton headlines.
+- **Surnames reduced to an initial** — public reviews, but first-name-plus-initial
+  is the kinder convention. Matt has no surname on Google.
+- **No job titles or towns.** The placeholders invented "Restaurant Owner ·
+  Town, NY"; Google doesn't tell us either, so the attribution is just the name
+  and "Google review".
+- **Dates omitted.** Two of the three are 5 and 8 years old. True, but "8 years
+  ago" under a testimonial reads as neglect rather than longevity.
+
+**Worth confirming with John** that he's happy to have these on the site, even
+though they're already public.
+
+### Review schema — deliberately not added
+
+No `aggregateRating` or `review` markup in the JSON-LD. Google's structured-data
+policy restricts self-serving review markup for `LocalBusiness`, and getting it
+wrong risks a manual action. The stars in the testimonial cards are presentational
+only. If they want star ratings in search results, the route is the Google
+Business Profile, not markup on their own site.
 
 ## Facts to confirm with John
 
 - [ ] "100s of local businesses" — is there a real number they'd rather use?
-- [ ] 24-hour emergency service — still offered? How is it reached after 5pm?
+- [ ] **Emergency service — what can they actually commit to?** The site now says
+      "emergency service available" with no timeframe attached. If John confirms a
+      real one, these are the exact strings to change:
+      utility bar and mobile menu `Emergency service available`,
+      hours table `Just call`, trust strip `Rush` / `Orders when you're stuck`,
+      and the Why J&A heading `Emergency Service`.
+- [ ] "Same driver, same day each week" (How It Works, step 3) — plausible for a
+      route business but nobody told us this. Confirm or soften.
 - [ ] Service area — "Manhattan to Montauk" came from their own materials
 - [ ] Email — `Jaapron@hotmail.com` is what's on Instagram. A domain address
       (john@jaapron.com) would look sharper and is free to set up.
 - [ ] Business name for the footer/legal line: "J&A Coat, Apron & Linen Service"
 - [ ] "No contracts" claim — reviews say it, but confirm before we put it in the hero
+
+### Where "24-hour" came from, and why it's gone
+
+The claim traced back to a **filename on their old site** — `jaapron.com/24houremergency.html`.
+That page is real and indexed, but its title is just "Emergency Services", the
+Google/Yelp description says only "with our emergency services, you'll never be
+left out to dry", and the page body was never retrievable (jaapron.com returns
+empty). A URL slug on an undated page isn't a service commitment, and it was
+sitting in four places including the bar above every screen, right next to
+"Mon–Fri 8:00am–5:00pm".
+
+Removed everywhere. Emergency service is still on the site in four places, just
+without a clock attached. "Same day" was considered and rejected for the same
+reason — it's an unverified timing promise, only a smaller one.
+
+The `/24houremergency.html` redirect in `netlify.toml` stays. That's a real URL
+of theirs and should still land somewhere sensible.
 
 Note: the `geo` coordinates were removed from the schema markup rather than
 shipped as a guess. Google geocodes from the street address, so nothing is lost.

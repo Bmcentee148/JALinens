@@ -52,3 +52,6 @@ npm-debug.log*
 *.sketch
 *.fig
 *.xcf
+
+# Source screenshots for the testimonials — not part of the site
+/reviews/

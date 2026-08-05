@@ -458,11 +458,8 @@ body.menu-open{overflow:hidden}
 }
 .quote cite span{display:block;font-family:var(--body);font-weight:400;
   text-transform:none;letter-spacing:0;font-size:.88rem;color:var(--muted)}
-.placeholder-tag{
-  display:inline-block;font-family:var(--ui);font-size:.66rem;font-weight:600;
-  text-transform:uppercase;letter-spacing:.1em;background:#FFF0C2;color:#8A6A00;
-  border:1px solid #E8CE72;padding:.22rem .5rem;border-radius:2px;margin-bottom:.9rem;
-}
+.quote__stars{display:flex;gap:2px;margin-bottom:.55rem}
+.quote__stars svg{width:17px;height:17px;fill:#E8A400}
 
 /* ---------- CTA / Contact ---------- */
 .contact{background:var(--white);border-top:1px solid var(--line)}
@@ -594,7 +591,7 @@ body.menu-open{overflow:hidden}
     </div>
     <div class="utility__item">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 10.6l4 2.3-.9 1.6-5.1-3V6h2z"/></svg>
-      <span><strong>Mon&ndash;Fri 8:00am&ndash;5:00pm</strong> &middot; 24-hour emergency service</span>
+      <span><strong>Mon&ndash;Fri 8:00am&ndash;5:00pm</strong> &middot; Emergency service available</span>
     </div>
   </div>
 </div>
@@ -652,7 +649,7 @@ body.menu-open{overflow:hidden}
       </a>
       <p class="mobilemenu__hours">
         <strong>Mon&ndash;Fri 8:00am&ndash;5:00pm</strong><br>
-        24-hour emergency service
+        Emergency service available
       </p>
     </div>
   </div>
@@ -711,8 +708,8 @@ body.menu-open{overflow:hidden}
         <span class="trust__label">Of local businesses</span>
       </div>
       <div class="trust__item">
-        <span class="trust__num">24hr</span>
-        <span class="trust__label">Emergency service</span>
+        <span class="trust__num">Rush</span>
+        <span class="trust__label">Orders when you're stuck</span>
       </div>
     </div>
   </div>
@@ -859,7 +856,8 @@ body.menu-open{overflow:hidden}
       <h2>It All Happens on Penataquit Avenue</h2>
       <p class="lede">
         We're not a broker who ships your linen somewhere else. Everything is washed, pressed and
-        sorted in our own Bay Shore plant &mdash; which is why we can fix a problem the same day.
+        sorted in our own Bay Shore plant, so when something needs fixing it's handled by the
+        people who own the place &mdash; not passed down a chain of subcontractors.
       </p>
     </div>
 
@@ -1004,8 +1002,8 @@ body.menu-open{overflow:hidden}
       <div class="why__item">
         <div class="why__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 10.6l4 2.3-.9 1.6-5.1-3V6h2z"/></svg></div>
         <div>
-          <h3>24-Hour Emergency Service</h3>
-          <p>A busted water line, a surprise party of sixty, a delivery you forgot to call in. You won't be left out to dry.</p>
+          <h3>Emergency Service</h3>
+          <p>A busted water line, a surprise party of sixty, a delivery you forgot to call in. Call the shop and we'll work it out &mdash; you won't be left out to dry.</p>
         </div>
       </div>
       <div class="why__item">
@@ -1036,24 +1034,50 @@ body.menu-open{overflow:hidden}
 
     <div class="quotes">
       <blockquote class="quote">
-        <span class="placeholder-tag">Placeholder &mdash; swap in real review</span>
+        <span class="quote__stars" aria-label="Rated 5 out of 5">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+        </span>
         <span class="quote__mark" aria-hidden="true">&ldquo;</span>
-        <p>Replace with a verified customer quote about switching from a national supplier and finding no hidden costs or contracts.</p>
-        <cite>First Name L.<span>Restaurant Owner &middot; Town, NY</span></cite>
+        <p>Great business, these folks treat you like a customer not a number&hellip;
+           No hidden costs, contracts or BS. They are a pleasure to deal with and they
+           take care of you even when you make mistakes on your order. The owner John
+           gives you his cell and the manager Steve is always available&hellip; Happy I
+           switched and you will be too.</p>
+        <cite>Anthony D.<span>Google review</span></cite>
       </blockquote>
 
       <blockquote class="quote">
-        <span class="placeholder-tag">Placeholder &mdash; swap in real review</span>
+        <span class="quote__stars" aria-label="Rated 5 out of 5">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+        </span>
         <span class="quote__mark" aria-hidden="true">&ldquo;</span>
-        <p>Replace with a verified customer quote about reliability &mdash; deliveries showing up on time, never running short during a rush.</p>
-        <cite>First Name L.<span>Pizzeria Owner &middot; Town, NY</span></cite>
+        <p>J&amp;A is by far the most reliable linen service on the island. John Faracco
+           and his son Jonathan pride themselves and the name of the business on customer
+           service. These guys will do anything on the drop of a dime to help your business
+           run flawlessly. Not only are they reliable and loyal to their customers their
+           products are top of the line in quality. Highly recommended!</p>
+        <cite>Matt<span>Google review</span></cite>
       </blockquote>
 
       <blockquote class="quote">
-        <span class="placeholder-tag">Placeholder &mdash; swap in real review</span>
+        <span class="quote__stars" aria-label="Rated 5 out of 5">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.3 6.9.9-5 4.8 1.2 6.8L12 17.6 5.9 20.8 7.1 14l-5-4.8 6.9-.9z"/></svg>
+        </span>
         <span class="quote__mark" aria-hidden="true">&ldquo;</span>
-        <p>Replace with a verified customer quote about the personal service &mdash; being able to reach the owner directly when something goes wrong.</p>
-        <cite>First Name L.<span>Deli Owner &middot; Town, NY</span></cite>
+        <p>What an amazing staff they have at J&amp;A, wonderful people!</p>
+        <cite>Shauna B.<span>Google review</span></cite>
       </blockquote>
     </div>
   </div>
@@ -1106,7 +1130,7 @@ body.menu-open{overflow:hidden}
           <div class="callbox__hours">
             <div><span>Monday &ndash; Friday</span><strong>8:00am &ndash; 5:00pm</strong></div>
             <div><span>Saturday &ndash; Sunday</span><strong>Closed</strong></div>
-            <div><span>Emergency service</span><strong>24 hours</strong></div>
+            <div><span>Emergency service</span><strong>Just call</strong></div>
           </div>
         </div>
 
