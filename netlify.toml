@@ -15,15 +15,6 @@
 #  Redirects
 # ---------------------------------------------------------------------
 
-# The internal build notes are committed for version history, but there's
-# no reason for the public to read them. 404 rather than redirect, so we
-# don't hint that the file exists.
-[[redirects]]
-  from = "/NOTES.md"
-  to = "/404.html"
-  status = 404
-  force = true
-
 # Old jaapron.com pages -> the matching section of the one-pager.
 # Keeps whatever link equity those URLs have and avoids 404s for anyone
 # with an old bookmark or a stale search result.

@@ -5,21 +5,34 @@ Benchwork Digital · first pass, August 5, 2026
 ## Files
 
 ```
-site/
-├── index.html              the whole site (CSS inlined, single file)
-├── thank-you.html          form success page
-├── robots.txt
-├── sitemap.xml
-├── favicon.ico
-└── assets/img/
-    ├── ja-logo.webp        720×261, cleaned + trimmed from JALogo.png
-    ├── ja-shield-512.png   schema.org logo (PNG — Google prefers it)
-    ├── apple-touch-icon.png  iOS home screen (PNG — iOS won't take WebP)
-    ├── og-image.jpg        1200×630 social share card (see below)
-    └── photos/             7 photos × 2–3 widths each, all WebP
+JA_Linens/                  repo root — nothing here is published
+├── netlify.toml            publish = "site"
+├── .gitignore              keeps source material out of the repo
+├── NOTES.md                this file
+├── images/                 original photography (ignored)
+├── *.png                   master logos + screenshots (ignored)
+│
+└── site/                   THE DEPLOY — served at the domain root
+    ├── .gitignore
+    ├── index.html          the whole site (CSS inlined, single file)
+    ├── thank-you.html      form success page
+    ├── 404.html
+    ├── robots.txt
+    ├── sitemap.xml
+    ├── favicon.ico
+    └── assets/img/
+        ├── ja-logo.webp        720×261, cleaned + trimmed from JALogo.png
+        ├── ja-shield-512.png   schema.org logo (PNG — Google prefers it)
+        ├── apple-touch-icon.png  iOS home screen (PNG — iOS won't take WebP)
+        ├── og-image.jpg        1200×630 social share card (see below)
+        └── photos/             7 photos × 2–3 widths each, all WebP
 ```
 
-Open `index.html` in a browser to review. No build step, no dependencies except Google Fonts.
+Open `site/index.html` in a browser to review. No build step, no dependencies
+except Google Fonts.
+
+The split matters: anything inside `site/` is live at `jaapron.com/<path>`.
+Everything above it — including these notes — stays private.
 
 ## Page order
 
@@ -218,10 +231,8 @@ Every push to `main` deploys.
 
 `netlify.toml` handles:
 
-- Publish directory (repo root, no build step)
+- Publish directory (`site`, no build step)
 - 301s from the twelve old jaapron.com URLs to the right sections
-- `NOTES.md` returns 404 — it's committed for history but not readable publicly.
-  It 404s rather than redirecting, so we don't advertise that it exists.
 - Long-lived immutable cache on `/assets/img/*` (filenames carry the width, so a
   changed image is a changed filename), HTML set to always revalidate
 - `nosniff`, `SAMEORIGIN`, referrer and permissions policy headers
@@ -311,9 +322,29 @@ Anton is display-only for a reason: at 13px with wide tracking it turns into a
 chunky mess, so all the small uppercase UI runs in Source Sans 3 instead. That
 split is what keeps the headings loud and the interface readable.
 
-The type scale was reduced when Anton replaced Oswald — Anton carries far more
-weight per pixel, so h1 went from 4.35rem to 3.7rem max and the rest scaled to
-match. Tracking opened from `.005em` to `.015em`; heavy caps close up without it.
+Tracking is `.015em` rather than `.005em` — heavy caps close up without it.
+
+### Type scale
+
+At the 18px body maximum:
+
+| Level | Max size | × body |
+|---|---|---|
+| h1 | 4.05rem / 64.8px | 3.60 |
+| h2 | 2.8rem / 44.8px | 2.49 |
+| h3 | 1.55rem / 24.8px | 1.38 |
+| body | 18px | 1.00 |
+
+**Anton is heavy but condensed, so it needs *more* size than a normal-width face
+to carry the same presence, not less.** The first pass got this backwards — the
+scale was cut ~15% on the reasoning that Anton is heavier, which left h3 at
+1.17× body and the "Why J&A" headings at 1.03×, indistinguishable from body
+copy. Headline presence is driven by width, and Anton is narrow.
+
+If a heading ever needs its own size, keep it at **1.25× body or above** or it
+stops reading as a heading. The two overrides that exist (`.why__item h3` at
+1.29×, `.callbox h3` at 1.33×) sit just under the base on purpose, because
+they're in narrower columns.
 
 Note the social share card (`og-image.jpg`) is set in Nimbus Sans Narrow Bold,
 which is lighter than Anton. If it's ever rebuilt, Anton would match better.

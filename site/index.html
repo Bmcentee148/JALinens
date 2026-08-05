@@ -87,10 +87,11 @@ h1,h2,h3,h4{
   margin:0 0 .5em;
   text-transform:uppercase;
 }
-/* sized down from the previous scale — Anton carries far more weight per px */
-h1{font-size:clamp(2.05rem,5.3vw,3.7rem)}
-h2{font-size:clamp(1.7rem,3.6vw,2.55rem)}
-h3{font-size:clamp(1.12rem,1.8vw,1.32rem)}
+/* Anton is heavy but condensed — it needs more size than a normal-width face
+   to carry the same presence. h3 sits ~1.4x body so the hierarchy reads. */
+h1{font-size:clamp(2.25rem,5.7vw,4.05rem)}
+h2{font-size:clamp(1.85rem,3.9vw,2.8rem)}
+h3{font-size:clamp(1.3rem,2.1vw,1.55rem)}
 p{margin:0 0 1.1em}
 a{color:var(--blue);text-decoration-thickness:1.5px;text-underline-offset:3px}
 img{max-width:100%;height:auto;display:block}
@@ -296,7 +297,7 @@ body.menu-open{overflow:hidden}
 .trust__item{padding:1.9rem 1rem;border-right:1px solid rgba(255,255,255,.13)}
 .trust__item:last-child{border-right:0}
 .trust__num{
-  font-family:var(--display);font-weight:400;font-size:clamp(1.75rem,3.1vw,2.45rem);
+  font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,3.4vw,2.7rem);
   color:#fff;line-height:1;display:block;
 }
 .trust__label{
@@ -377,7 +378,7 @@ body.menu-open{overflow:hidden}
 }
 .band__item strong{
   display:block;font-family:var(--ui);font-weight:600;
-  text-transform:uppercase;letter-spacing:.05em;font-size:1.02rem;
+  text-transform:uppercase;letter-spacing:.05em;font-size:1.1rem;
   color:#fff;margin-bottom:.2rem;
 }
 
@@ -393,7 +394,7 @@ body.menu-open{overflow:hidden}
 .step{position:relative;padding-top:1.75rem}
 .step::before{
   counter-increment:step;content:"0" counter(step);
-  font-family:var(--display);font-weight:400;font-size:3rem;line-height:.8;
+  font-family:var(--display);font-weight:400;font-size:3.4rem;line-height:.8;
   color:var(--paper-2);display:block;margin-bottom:.85rem;
 }
 .step h3{margin-bottom:.5rem}
@@ -416,7 +417,7 @@ body.menu-open{overflow:hidden}
 .serve__item svg{width:30px;height:30px;fill:#FF8A8D}
 .serve__item strong{
   font-family:var(--ui);font-weight:600;text-transform:uppercase;
-  letter-spacing:.05em;font-size:1.04rem;color:#fff;
+  letter-spacing:.05em;font-size:1.12rem;color:#fff;
 }
 .serve__item span{font-size:.93rem;color:#A9BCD8;line-height:1.5}
 
@@ -428,7 +429,7 @@ body.menu-open{overflow:hidden}
   display:grid;place-items:center;
 }
 .why__icon svg{width:23px;height:23px;fill:#fff}
-.why__item h3{font-size:1.16rem;margin-bottom:.35rem}
+.why__item h3{font-size:1.45rem;margin-bottom:.4rem}
 .why__item p{margin:0;font-size:.99rem;color:var(--muted)}
 
 /* ---------- Quotes ---------- */
@@ -440,7 +441,7 @@ body.menu-open{overflow:hidden}
 /* line-height:1 keeps the glyph inside its own box; the negative bottom margin
    gives the tight look without letting the ink overflow into whatever sits above */
 .quote__mark{
-  font-family:var(--display);font-size:2.9rem;line-height:1;color:var(--paper-2);
+  font-family:var(--display);font-size:3.2rem;line-height:1;color:var(--paper-2);
   display:block;margin:0 0 -.75rem;
 }
 .quote p{font-size:1.03rem;color:var(--ink);margin:0 0 1.1rem}
@@ -465,12 +466,12 @@ body.menu-open{overflow:hidden}
   background:var(--ink);color:#fff;border-radius:4px;padding:2.2rem 2rem;
   border-top:4px solid var(--red);
 }
-.callbox h3{color:#fff;font-size:1.3rem;margin-bottom:.4rem}
+.callbox h3{color:#fff;font-size:1.5rem;margin-bottom:.45rem}
 .callbox p{color:#A8B0BC;font-size:.97rem}
 .callbox__num{
   display:inline-flex;align-items:center;gap:.7rem;
   font-family:var(--display);font-weight:400;
-  font-size:clamp(1.8rem,4.1vw,2.45rem);color:#fff;text-decoration:none;
+  font-size:clamp(1.95rem,4.4vw,2.7rem);color:#fff;text-decoration:none;
   line-height:1;margin:.4rem 0 .9rem;
 }
 .callbox__num:hover{color:#FF8A8D}
@@ -1094,12 +1095,12 @@ body.menu-open{overflow:hidden}
           </div>
         </div>
 
-        <!-- Map removed for now. Full restore snippet is in NOTES.md → "Putting the map back". -->
+        <!-- Map removed for now. Restore snippet is in ../NOTES.md → "Putting the map back". -->
       </div>
 
       <!-- Right: form -->
       <div>
-        <h3 style="font-size:1.3rem;margin-bottom:1.2rem">Request a Quote</h3>
+        <h3 style="font-size:1.5rem;margin-bottom:1.2rem">Request a Quote</h3>
         <form class="form" name="quote" method="POST" data-netlify="true" netlify-honeypot="company-website" action="/thank-you.html">
           <input type="hidden" name="form-name" value="quote">
           <p class="hp"><label>Don't fill this out: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
