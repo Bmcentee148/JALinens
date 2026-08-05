@@ -1,0 +1,111 @@
+# =====================================================================
+#  J&A Linen Service — Netlify configuration
+#  Benchwork Digital
+#
+#  Static site, no build step. The repo root is the publish directory.
+#  In the Netlify UI: leave "Base directory" and "Build command" empty.
+# =====================================================================
+
+[build]
+  publish = "."
+
+# ---------------------------------------------------------------------
+#  Redirects
+# ---------------------------------------------------------------------
+
+# The internal build notes are committed for version history, but there's
+# no reason for the public to read them. 404 rather than redirect, so we
+# don't hint that the file exists.
+[[redirects]]
+  from = "/NOTES.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Old jaapron.com pages -> the matching section of the one-pager.
+# Keeps whatever link equity those URLs have and avoids 404s for anyone
+# with an old bookmark or a stale search result.
+[[redirects]]
+  from = "/about.html"
+  to = "/#why"
+  status = 301
+
+[[redirects]]
+  from = "/whychooseus.html"
+  to = "/#why"
+  status = 301
+
+[[redirects]]
+  from = "/services.html"
+  to = "/#supply"
+  status = 301
+
+[[redirects]]
+  from = "/apronandtowel.html"
+  to = "/#supply"
+  status = 301
+
+[[redirects]]
+  from = "/chefwear.html"
+  to = "/#supply"
+  status = 301
+
+[[redirects]]
+  from = "/napkinsandlinens.html"
+  to = "/#supply"
+  status = 301
+
+[[redirects]]
+  from = "/rugscleaned.html"
+  to = "/#supply"
+  status = 301
+
+[[redirects]]
+  from = "/offsiterentals.html"
+  to = "/#supply"
+  status = 301
+
+[[redirects]]
+  from = "/cateringhallservice.html"
+  to = "/#serve"
+  status = 301
+
+[[redirects]]
+  from = "/24houremergency.html"
+  to = "/#why"
+  status = 301
+
+[[redirects]]
+  from = "/testimonials.html"
+  to = "/#contact"
+  status = 301
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/#contact"
+  status = 301
+
+# ---------------------------------------------------------------------
+#  Headers
+# ---------------------------------------------------------------------
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), camera=(), microphone=(), payment=()"
+
+# Images are content-hashed by filename (name-WIDTH.webp), so a change
+# means a new filename. Safe to cache hard.
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML must revalidate so edits go live immediately.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

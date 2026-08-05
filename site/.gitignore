@@ -1,0 +1,59 @@
+# =====================================================================
+#  J&A Linen Service — Benchwork Digital
+#
+#  This repo IS the deploy. Netlify publishes the repo root, so anything
+#  committed here is publicly reachable at jaapron.com/<path>.
+#  Before adding a file, ask whether it's fine for a stranger to open it.
+# =====================================================================
+
+# ---- OS cruft -------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ---- Editors --------------------------------------------------------
+.vscode/
+.idea/
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# ---- Tooling / local only -------------------------------------------
+.netlify/
+node_modules/
+npm-debug.log*
+yarn-error.log
+.cache/
+
+# Never commit secrets. If a Google Maps API key gets added later,
+# keep it referrer-restricted — it will be visible in the HTML.
+.env
+.env.*
+!.env.example
+
+# ---- Superseded assets ----------------------------------------------
+# Master PNG of the logo. Superseded by ja-logo.webp, which is what the
+# pages actually load. Kept on disk as the editable source, not shipped.
+assets/img/ja-logo.png
+
+# Unused WebP twin of the social share image. Facebook, LinkedIn and
+# iMessage want the JPEG, so only og-image.jpg is referenced.
+assets/img/og-image.webp
+
+# ---- Design sources -------------------------------------------------
+# Originals and working files stay on the Desktop, outside this repo.
+*.psd
+*.ai
+*.sketch
+*.fig
+*.xcf
+/images/
