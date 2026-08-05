@@ -275,8 +275,20 @@ panel from the right: the six nav links, then the call button pinned at the
 bottom with hours under it.
 
 The header call button only disappears below **760px**, where the sticky bottom
-call bar takes over. Between 760 and 1100 the nav is gone, so there's room to
+call bar takes over. Between 760 and 1140 the nav is gone, so there's room to
 keep the number visible in the header.
+
+**Sticky call bar (mobile, below 760px).** It doesn't sit there the whole time.
+Two IntersectionObservers watch the hero and the contact section + footer, and
+the bar only shows in between — it slides up once the hero scrolls away and
+slides back down when the contact section arrives. Those are the two places the
+phone number is already large on screen, so an always-on bar was redundant there
+while permanently costing 58px of a small screen.
+
+Progressive enhancement: the bar is plain visible in CSS, and the script adds
+`.is-managed` to take over. With JS off, or on a browser without
+IntersectionObserver, it just stays visible like before. While hidden it's
+`visibility:hidden`, so it isn't keyboard-focusable.
 
 Nav type is `clamp(.85rem, .471rem + .569vw, .97rem)` — 13.6px right at the
 handover, scaling to 15.5px from about 1240px up, where the 1180px wrap stops
@@ -328,12 +340,39 @@ Tracking is `.015em` rather than `.005em` — heavy caps close up without it.
 
 At the 18px body maximum:
 
-| Level | Max size | × body |
+| Level | 390px (phone) | 1440px (desktop) |
 |---|---|---|
-| h1 | 4.05rem / 64.8px | 3.60 |
-| h2 | 2.8rem / 44.8px | 2.49 |
-| h3 | 1.55rem / 24.8px | 1.38 |
-| body | 18px | 1.00 |
+| h1 | 45.2px · 2.74× body | 64.8px · 3.60× |
+| h2 | 34.9px · 2.11× | 44.8px · 2.49× |
+| h3 | 22.7px · 1.38× | 24.8px · 1.38× |
+| body | 16.5px | 18px |
+
+**Every clamp uses a two-term preferred value — `rem + vw`, not bare `vw`.**
+This matters more than it looks. `clamp(2.25rem, 5.7vw, 4.05rem)` never clears
+its own minimum until about a 630px viewport, so every phone from a 320px SE to
+a 430px Pro Max rendered the identical 36px headline. The rem offset makes the
+type start scaling immediately. If you add a heading, copy this pattern.
+
+### Hero headline
+
+The break points are **explicit**, not left to natural wrapping:
+
+```html
+<h1><span>Long Island</span> <span>Runs&nbsp;With</span> <em>J&amp;A.</em></h1>
+```
+
+with `.hero h1 span,.hero h1 em{display:block}`. It stacks the same at every
+width — LONG ISLAND / RUNS WITH / J&A.
+
+Natural wrapping didn't work. Anton is narrower than it looks, so at phone
+widths "LONG ISLAND RUNS WITH" fit on one line and left "J&A." orphaned
+underneath, and the break point shifted as the font size changed. Chasing it
+with a `max-width:14ch` cap only worked at some sizes. Three blocks is stable.
+
+Because the longest line is now "LONG ISLAND" rather than the full 21-character
+phrase, there's much more room, which is why h1 sits at ~51px on a 390px phone
+(3.1× body). Keep the `&nbsp;` — it stops "Runs With" splitting if that line
+ever needs to wrap. Screen readers still read it as one sentence.
 
 **Anton is heavy but condensed, so it needs *more* size than a normal-width face
 to carry the same presence, not less.** The first pass got this backwards — the

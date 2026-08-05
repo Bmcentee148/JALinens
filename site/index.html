@@ -88,10 +88,13 @@ h1,h2,h3,h4{
   text-transform:uppercase;
 }
 /* Anton is heavy but condensed — it needs more size than a normal-width face
-   to carry the same presence. h3 sits ~1.4x body so the hierarchy reads. */
-h1{font-size:clamp(2.25rem,5.7vw,4.05rem)}
-h2{font-size:clamp(1.85rem,3.9vw,2.8rem)}
-h3{font-size:clamp(1.3rem,2.1vw,1.55rem)}
+   to carry the same presence. h3 sits ~1.4x body so the hierarchy reads.
+   Two-term preferred values (rem + vw) so the type keeps scaling on phones;
+   a bare vw term never clears the minimum below ~630px and every handset
+   ends up pinned to the same size. */
+h1{font-size:clamp(3.1rem,2.1rem + 4.6vw,4.05rem)}
+h2{font-size:clamp(2.1rem,1.5rem + 2.8vw,2.8rem)}
+h3{font-size:clamp(1.4rem,1.15rem + 1.1vw,1.55rem)}
 p{margin:0 0 1.1em}
 a{color:var(--blue);text-decoration-thickness:1.5px;text-underline-offset:3px}
 img{max-width:100%;height:auto;display:block}
@@ -272,8 +275,12 @@ body.menu-open{overflow:hidden}
     linear-gradient(105deg,rgba(10,42,94,.96) 0%,rgba(10,42,94,.90) 42%,rgba(10,42,94,.62) 72%,rgba(10,42,94,.45) 100%);
 }
 .hero__inner{position:relative;padding-block:clamp(64px,10vw,124px)}
-.hero h1{color:#fff;max-width:14ch;text-shadow:0 2px 20px rgba(0,0,0,.25)}
-.hero h1 em{font-style:normal;color:#FF8A8D;display:block}
+.hero h1{color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.25)}
+/* Explicit three-line stack. Relying on natural wrapping left "J&A." orphaned
+   on its own line at phone widths, and the break point moved around with the
+   font size. Each phrase is its own block, so it reads the same everywhere. */
+.hero h1 span,.hero h1 em{display:block}
+.hero h1 em{font-style:normal;color:#FF8A8D}
 .hero__sub{font-size:clamp(1.08rem,1.6vw,1.28rem);color:#DCE5F2;max-width:52ch;margin-bottom:2rem}
 .hero__actions{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
 .hero__note{
@@ -553,6 +560,14 @@ body.menu-open{overflow:hidden}
   position:fixed;left:0;right:0;bottom:0;z-index:120;display:none;
   background:var(--red);box-shadow:0 -4px 18px rgba(0,0,0,.22);
 }
+/* Visible by default so it still works without JS. Once the script runs it adds
+   .is-managed and only reveals the bar between the hero and the contact section —
+   the two places the phone number is already large on screen. */
+.callbar.is-managed{
+  transform:translateY(110%);visibility:hidden;
+  transition:transform .26s cubic-bezier(.4,0,.2,1),visibility .26s;
+}
+.callbar.is-managed.is-on{transform:translateY(0);visibility:visible}
 .callbar a{
   display:flex;align-items:center;justify-content:center;gap:.6rem;
   padding:1rem;color:#fff;text-decoration:none;
@@ -659,7 +674,7 @@ body.menu-open{overflow:hidden}
   </div>
   <div class="wrap hero__inner">
     <span class="hero__badge">Family owned since 1958</span>
-    <h1>Long Island Runs&nbsp;With <em>J&amp;A.</em></h1>
+    <h1><span>Long Island</span> <span>Runs&nbsp;With</span> <em>J&amp;A.</em></h1>
     <p class="hero__sub">
       Four generations of one Bay Shore family keeping Long Island kitchens stocked with clean
       aprons, towels, chef wear and table linens. We pick up, we wash, we deliver, and we put it
@@ -1219,6 +1234,43 @@ body.menu-open{overflow:hidden}
 
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ---------------- Sticky call bar ----------------
+     Only useful mid-page. Over the hero there's a call button right there, and
+     over the contact section the number is the largest thing on screen. So the
+     bar shows only between the two. Without JS it just stays visible. */
+  (function () {
+    var bar = document.querySelector('.callbar');
+    if (!bar || !('IntersectionObserver' in window)) return;
+
+    var hero = document.querySelector('.hero');
+    var tail = [document.getElementById('contact'), document.querySelector('.footer')]
+                 .filter(Boolean);
+    if (!hero) return;
+
+    bar.classList.add('is-managed');
+
+    var heroOnScreen = true;
+    var tailOnScreen = new Set();
+
+    function update() {
+      bar.classList.toggle('is-on', !heroOnScreen && tailOnScreen.size === 0);
+    }
+
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { heroOnScreen = e.isIntersecting; });
+      update();
+    }).observe(hero);
+
+    var tailObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) tailOnScreen.add(e.target);
+        else tailOnScreen.delete(e.target);
+      });
+      update();
+    });
+    tail.forEach(function (el) { tailObserver.observe(el); });
+  })();
 
   /* ---------------- Mobile menu ---------------- */
   (function () {
