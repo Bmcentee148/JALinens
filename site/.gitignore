@@ -1,9 +1,12 @@
 # =====================================================================
 #  J&A Linen Service — Benchwork Digital
 #
-#  This repo IS the deploy. Netlify publishes the repo root, so anything
-#  committed here is publicly reachable at jaapron.com/<path>.
-#  Before adding a file, ask whether it's fine for a stranger to open it.
+#  THIS FOLDER IS THE DEPLOY. netlify.toml (at the repo root) publishes
+#  site/, so anything committed here is publicly reachable at
+#  jaapron.com/<path>. Before adding a file, ask whether it's fine for a
+#  stranger to open it.
+#
+#  The repo root has its own .gitignore for source material.
 # =====================================================================
 
 # ---- OS cruft -------------------------------------------------------

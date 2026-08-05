@@ -2,12 +2,14 @@
 #  J&A Linen Service — Netlify configuration
 #  Benchwork Digital
 #
-#  Static site, no build step. The repo root is the publish directory.
-#  In the Netlify UI: leave "Base directory" and "Build command" empty.
+#  Static site, no build step. This file must live at the REPO ROOT — Netlify
+#  only reads netlify.toml from there, never from a subfolder.
+#  The site itself lives in site/, which is the publish directory below.
+#  In the Netlify UI leave "Base directory" and "Build command" EMPTY.
 # =====================================================================
 
 [build]
-  publish = "."
+  publish = "site"
 
 # ---------------------------------------------------------------------
 #  Redirects

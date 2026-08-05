@@ -189,25 +189,32 @@ points at the matching section of the one-pager rather than just the homepage.
 
 ## Git & deploy
 
-**This folder is the repo root.** Netlify publishes it directly, which means
-anything committed is reachable at `jaapron.com/<path>`. Before adding a file,
-ask whether a stranger opening it would be a problem.
+Repo: `github.com/Bmcentee148/JALinens`, branch `main`.
 
-Set up:
+Layout — **`netlify.toml` must sit at the repo root**, not in `site/`. Netlify
+only reads that file from the repo root (or from a configured base directory);
+it will never find one in a subfolder.
 
-```bash
-cd site
-git init
-git add .
-git commit -m "Initial site"
-git branch -M main
-git remote add origin <repo-url>
-git push -u origin main
+```
+JA_Linens/            <- repo root
+├── netlify.toml      <- publish = "site"
+├── .gitignore        <- keeps source material out
+├── images/           (ignored)
+├── *.png             (ignored — master logos, screenshots)
+└── site/             <- THE DEPLOY, published at the domain root
+    ├── .gitignore
+    ├── index.html
+    └── ...
 ```
 
-Then in Netlify: **Add new site → Import an existing project**, pick the repo,
-and leave *Base directory* and *Build command* empty — `netlify.toml` sets the
-publish directory. Every push to `main` deploys.
+Anything committed inside `site/` is publicly reachable at `jaapron.com/<path>`.
+Before adding a file there, ask whether a stranger opening it is a problem.
+
+In Netlify, leave **Base directory** and **Build command** empty. `netlify.toml`
+handles it. Don't set a base directory — with `publish = "site"` already relative
+to the repo root, setting base to `site` as well would resolve to `site/site`.
+
+Every push to `main` deploys.
 
 `netlify.toml` handles:
 
@@ -219,10 +226,15 @@ publish directory. Every push to `main` deploys.
   changed image is a changed filename), HTML set to always revalidate
 - `nosniff`, `SAMEORIGIN`, referrer and permissions policy headers
 
-`.gitignore` keeps out OS junk and two superseded files that would otherwise ship
-168 KB of dead weight: `assets/img/ja-logo.png` (replaced by the WebP) and
-`assets/img/og-image.webp` (social platforms want the JPEG). Both stay on disk
-locally as editable masters.
+Two `.gitignore` files, doing different jobs:
+
+- **Root** — keeps `images/` and the loose master PNGs out of the repo entirely.
+  The `/` prefix on those rules scopes them to the root so they don't touch
+  `site/assets/img/*.png`.
+- **`site/`** — keeps OS junk and two superseded files out of the deploy:
+  `assets/img/ja-logo.png` (replaced by the WebP) and `assets/img/og-image.webp`
+  (social platforms want the JPEG). 168 KB of dead weight. Both stay on disk
+  locally as editable masters.
 
 Committed total is about **1.1 MB**.
 

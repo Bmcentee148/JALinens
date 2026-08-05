@@ -1,0 +1,54 @@
+# =====================================================================
+#  J&A Linen Service — repo root
+#
+#  Only site/ is published (see netlify.toml → publish = "site").
+#  Everything else here is local working material and stays out of git.
+#  site/ has its own .gitignore for anything inside the deploy.
+# =====================================================================
+
+# ---- OS cruft -------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ---- Editors --------------------------------------------------------
+.vscode/
+.idea/
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# ---- Tooling --------------------------------------------------------
+.netlify/
+node_modules/
+npm-debug.log*
+.cache/
+.env
+.env.*
+!.env.example
+
+# ---- Source material (root level only) ------------------------------
+# Original photography and the master logo files. The optimized WebP
+# versions that the site actually serves live in site/assets/img/.
+# Leading slash keeps this scoped to the repo root — it must not touch
+# site/assets/img/*.png.
+/images/
+/*.png
+/*.jpg
+/*.jpeg
+
+# ---- Design sources -------------------------------------------------
+*.psd
+*.ai
+*.sketch
+*.fig
+*.xcf
