@@ -315,6 +315,30 @@ paths. It keeps the phone number on it.
 with full NAP + hours + service catalog + areaServed, canonical, Open Graph,
 sitemap.xml, robots.txt, descriptive alt text, explicit image dimensions.
 
+### Absolute URLs — the one thing to change at launch
+
+The site is currently live at **`https://jaaprons.netlify.app`**, and every
+absolute URL points there. When jaapron.com is switched over, search-and-replace
+that string across four files:
+
+```bash
+cd site
+grep -rl "jaaprons.netlify.app" . | xargs sed -i '' 's|https://jaaprons.netlify.app|https://www.jaapron.com|g'
+grep -rn "netlify.app" .   # should come back empty
+```
+
+That covers `index.html` (canonical, og:url, og:image ×3, twitter:image, and
+four spots in the JSON-LD), `thank-you.html`, `sitemap.xml` and `robots.txt`.
+
+**Why it matters:** og:image has to be absolute *and* actually resolve. It
+originally pointed at jaapron.com while the site was on Netlify, so iOS tried
+to fetch an image from a domain that doesn't serve this site, failed, and fell
+back to scraping the page — which is why sharing it produced the stockroom
+photo instead of the truck.
+
+Pick www or apex to match whatever Netlify is set to as primary, and make sure
+the other one redirects. A mismatch breaks this again in exactly the same way.
+
 **Still to do at launch:**
 - [ ] Submit sitemap in Google Search Console
 - [ ] Claim/verify the Google Business Profile and match NAP exactly
